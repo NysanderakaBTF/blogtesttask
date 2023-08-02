@@ -20,10 +20,9 @@ class PostSerializer(serializers.ModelSerializer):
     Usage:
     - Use this serializer in views to serialize Post objects and display them in API responses.
     """
-
-    # Define the 'author' field to use the author pk for author representation
     author = User.objects.all()
 
     class Meta:
+        read_only_fields = ('author',)
         model = Post
-        fields = ['id', 'author', 'title', 'body']
+        fields = ('id', 'author', 'title', 'body')

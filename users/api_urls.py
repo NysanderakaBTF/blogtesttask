@@ -1,15 +1,15 @@
 from django.urls import path
 from rest_framework.authtoken import views
 
-from users.views import sign_up, get_user_list
+from users.views import ListCreateUserAPIView
 
 urlpatterns = [
     # URL pattern for user login and obtaining an authentication token
     path('login/', views.obtain_auth_token, name='user_login'),
 
     # URL pattern for user sign up/registration
-    path('signup/', sign_up, name='user_signup'),
+    path('signup/', ListCreateUserAPIView.as_view(), name='user_signup'),
 
     # URL pattern for retrieving the list of users
-    path('list/', get_user_list, name='user_list'),
+    path('list/', ListCreateUserAPIView.as_view(), name='user_list'),
 ]
