@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    List of | {{ user.name }} | posts
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated and request.user.pk == user.id %}
+        <button type="button" onclick="location.href='{% url 'post_create_template' %}'" class="btn btn-primary">
+            Create post
+        </button>
+
+    {% endif %}
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="card center-block " style="width: 18rem; margin-bottom: 10px;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ post.id }} - {{ post.title }}</li>
+                        <li class="list-group-item">{{ post.body }}</li>
+                        <li class="list-group-item">By {{ user.name }}</li>
+                        {% if request.user.pk == user.id %}
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-danger"
+                                onclick="location.href='{% url 'delete_post_template' post.id %}'"
+                                >Delete</button>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>No posts from this user</h3>
+        {% endif %}
+    </div>
+{% endblock %}
