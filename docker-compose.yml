@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: >
+      sh -c " python3 ./manage.py migrate
+              python3 ./manage.py runserver 0.0.0.0:8000"
+    container_name: backend
+    hostname: backend
+    tty: true
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - .:/var/www

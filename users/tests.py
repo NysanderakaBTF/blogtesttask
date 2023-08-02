@@ -7,7 +7,19 @@ from users.models import User
 
 
 class TestUserAPI(TestCase):
+    """
+       Test class for User API endpoints.
+
+       This class contains test cases for user signup, login, email existence error, failed authentication,
+       and fetching the list of users.
+
+       Usage:
+       - Run the tests using a test runner (e.g., `python manage.py test`).
+
+       """
+
     def test_signup_user(self):
+        # Test user signup functionality.
         data = {
             'name': 'Alla',
             'email': 'alla@alla.com',
@@ -24,6 +36,7 @@ class TestUserAPI(TestCase):
         self.assertIn('token', data.keys())
 
     def test_login(self):
+        # Test user signup functionality.
         c = Client()
         us = User.objects.create(name='Alla',
                                  email='alla@alla.com')
@@ -37,13 +50,11 @@ class TestUserAPI(TestCase):
         }, content_type='application/json')
         data = json.loads(response.content)
 
-
         self.assertEquals(response.status_code, 200)
         self.assertEquals(token.key, data['token'])
 
-
-
     def test_email_exist_error(self):
+        # Test handling of email existence error during signup.
         us1 = User.objects.create(name='Alla',
                                   password='AllaAllaAlla12121212121',
                                   email='alla@alla.com')
@@ -67,6 +78,7 @@ class TestUserAPI(TestCase):
         })
 
     def test_failed_authentication(self):
+        # Test handling of failed authentication.
         us1 = User.objects.create(name='Alla',
                                   password='AllaAllaAlla12121212121',
                                   email='alla@alla.com')
@@ -89,6 +101,7 @@ class TestUserAPI(TestCase):
         })
 
     def test_users_list(self):
+        # Test fetching the list of users.
         c = Client()
         response = c.get('/api/users/list/')
         self.assertEquals(response.status_code, 200)
