@@ -65,7 +65,7 @@ docker compose up --build
 #### Получение списка постов (Get posts)
 
 - Метод: GET
-- URL: http://127.0.0.1:8000/api/posts/
+- URL: http://127.0.0.1:8000/api/posts/user/<int:user_pk>/
 - Заголовки: отсутствуют
 
 #### Удаление поста (Delete post)
