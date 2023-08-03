@@ -53,7 +53,7 @@ docker compose up --build
 #### Создание нового поста (Create post)
 
 - Метод: POST
-- URL: http://127.0.0.1:8000/api/posts/?Authorization=Token 562d123f8371d12a554eb7720e278a9748e9f91d
+- URL: http://127.0.0.1:8000/api/posts/
 - Тело запроса (JSON):
   ```json
   {
